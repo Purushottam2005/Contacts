@@ -1,0 +1,141 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.sebrevel.contacts</groupId>
+    <artifactId>contacts</artifactId>
+    <version>1.0</version>
+    <packaging>pom</packaging>
+    <name>Tutorials</name>
+
+    <modules>
+        <module>contacts-data-Derby</module>
+        <module>contacts-business-EJB</module>
+        <module>contacts-business-ear</module>
+
+        <module>contacts-common</module>
+        <module>contacts-presentation-JAXRS</module>
+
+		<module>contacts-ihm-EXTJS</module>
+		<module>contacts-presentation-ear</module>
+
+    </modules>
+
+    <properties>
+        <jee-version>6.0</jee-version>
+        <junit-version>4.10</junit-version>
+        <derby-version>10.4.2.0</derby-version>
+        <glassfish-embedded-version>3.2-SNAPSHOT</glassfish-embedded-version>
+    </properties>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.sebrevel.contacts</groupId>
+                <artifactId>contacts-common</artifactId>
+                <version>1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.sebrevel.contacts</groupId>
+                <artifactId>contacts-data-Derby</artifactId>
+                <version>1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.sebrevel.contacts</groupId>
+                <artifactId>contacts-business-EJB</artifactId>
+                <version>1.0</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>org.glassfish</groupId>
+                <artifactId>javax.ejb</artifactId>
+                <version>${glassfish-embedded-version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.glassfish.extras</groupId>
+                <artifactId>glassfish-embedded-all</artifactId>
+                <version>${glassfish-embedded-version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>javax</groupId>
+                <artifactId>javaee-api</artifactId>
+                <version>${jee-version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.sun.jersey</groupId>
+                <artifactId>jersey-json</artifactId>
+                <version>1.8</version>
+            </dependency>
+
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit-version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.derby</groupId>
+                <artifactId>derbyclient</artifactId>
+                <version>${derby-version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.derby</groupId>
+                <artifactId>derby</artifactId>
+                <version>${derby-version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.6.4</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <repositories>
+
+        <repository>
+            <id>glassfish-maven-repository.dev.java.net</id>
+            <name>GlassFish Maven Repository</name>
+            <url>http://download.java.net/maven/glassfish/</url>
+        </repository>
+
+        <repository>
+            <id>maven2-repository.dev.java.net</id>
+            <url>http://download.java.net/maven/2/</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>maven2-repository.dev.java.net</id>
+            <url>http://download.java.net/maven/2/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <inherited>true</inherited>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>	

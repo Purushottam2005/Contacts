@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.sebrevel.contacts</groupId>
+    <artifactId>contacts-business-EJB</artifactId>
+    <version>1.0</version>
+    <packaging>ejb</packaging>
+    <name>Tutorial - Business - EJB</name>
+
+    <parent>
+        <groupId>org.sebrevel.contacts</groupId>
+        <artifactId>contacts</artifactId>
+        <version>1.0</version>
+    </parent>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.sebrevel.contacts</groupId>
+            <artifactId>contacts-common</artifactId>
+        </dependency>
+
+		<dependency>
+            <groupId>org.sebrevel.contacts</groupId>
+            <artifactId>contacts-data-Derby</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.ejb</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish.extras</groupId>
+            <artifactId>glassfish-embedded-all</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sf.dozer</groupId>
+            <artifactId>dozer</artifactId>
+            <version>5.3.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+
+            <!--
+               Permet de mettre les fichiers de config (persistence.xml et domain.xml) dans le build
+            -->
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.5</version>
+                <executions>
+                    <execution>
+                        <id>copy-classes-to-embedded</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>target/embedded-classes</outputDirectory>
+                            <overwrite>true</overwrite>
+                            <resources>
+                                <resource>
+                                    <directory>target/classes</directory>
+                                </resource>
+                                <resource>
+                                    <directory>src/test/resources</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ejb-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <ejbVersion>3.1</ejbVersion>
+                </configuration>
+            </plugin>
+
+
+            <!--
+              Ce plugin avec le forkmode permet de jouer plusieurs tests unitaires  commencant par EJBContainer.createEJBContainer
+              Ca permet de ne pas avoir de conflit avec les derby et glassfish embedded, chaque test a les siens.
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <forkMode>perTest</forkMode>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+
+
+    <mapping>
+        <class-a>org.sebrevel.contacts.DTO.UserDTO</class-a>
+        <class-b>org.sebrevel.contacts.beans.User</class-b>
+    </mapping>
+
+    <mapping>
+        <class-a>org.sebrevel.contacts.DTO.ContactDTO</class-a>
+        <class-b>org.sebrevel.contacts.beans.Contact</class-b>
+    </mapping>
+
+    <mapping>
+        <class-a>org.sebrevel.contacts.DTO.PersonDTO</class-a>
+        <class-b>org.sebrevel.contacts.beans.Person</class-b>
+    </mapping>
+
+    <mapping>
+        <class-a>org.sebrevel.contacts.DTO.ActivityDTO</class-a>
+        <class-b>org.sebrevel.contacts.beans.Activity</class-b>
+    </mapping>
+
+    <mapping>
+        <class-a>org.sebrevel.contacts.DTO.AddressDTO</class-a>
+        <class-b>org.sebrevel.contacts.beans.Address</class-b>
+    </mapping>
+
+    <mapping>
+        <class-a>org.sebrevel.contacts.DTO.EmailDTO</class-a>
+        <class-b>org.sebrevel.contacts.beans.Email</class-b>
+    </mapping>
+
+    <mapping>
+        <class-a>org.sebrevel.contacts.DTO.PhoneDTO</class-a>
+        <class-b>org.sebrevel.contacts.beans.Phone</class-b>
+    </mapping>
+
+    <mapping>
+        <class-a>org.sebrevel.contacts.DTO.IdentityDTO</class-a>
+        <class-b>org.sebrevel.contacts.beans.Identity</class-b>
+    </mapping>
+
+</mappings>

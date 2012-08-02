@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.sebrevel.contacts</groupId>
+    <artifactId>contacts-business-ear</artifactId>
+    <version>1.0</version>
+    <packaging>ear</packaging>
+    <name>Tutorial - Business EAR</name>
+
+    <parent>
+        <groupId>org.sebrevel.contacts</groupId>
+        <artifactId>contacts</artifactId>
+        <version>1.0</version>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.sebrevel.contacts</groupId>
+            <artifactId>contacts-business-EJB</artifactId>
+            <type>ejb</type>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.sebrevel.contacts</groupId>
+            <artifactId>contacts-data-Derby</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.sebrevel.contacts</groupId>
+            <artifactId>contacts-common</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-ear-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <defaultLibBundleDir>/lib</defaultLibBundleDir>
+                    <modules>
+                        <ejbModule>
+                            <groupId>org.sebrevel.contacts</groupId>
+                            <artifactId>contacts-business-EJB</artifactId>
+                        </ejbModule>
+                        <jarModule>
+                            <groupId>org.sebrevel.contacts</groupId>
+                            <artifactId>contacts-data-Derby</artifactId>
+                            <bundleDir>/lib</bundleDir>
+                        </jarModule>
+                        <jarModule>
+                            <groupId>org.sebrevel.contacts</groupId>
+                            <artifactId>contacts-common</artifactId>
+                            <bundleDir>/lib</bundleDir>
+                        </jarModule>
+                    </modules>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

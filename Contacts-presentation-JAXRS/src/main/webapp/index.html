@@ -1,0 +1,202 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Page de test du Web Service REST</title>
+</head>
+<body>
+
+<script>
+    var xhr_object = null;
+
+    if (window.XMLHttpRequest) // Firefox
+        xhr_object = new XMLHttpRequest();
+    else if (window.ActiveXObject) // Internet Explorer
+        xhr_object = new ActiveXObject("Microsoft.XMLHTTP");
+    else { // XMLHttpRequest non supporté par le navigateur
+        alert("Votre navigateur ne supporte pas les objets XMLHTTPRequest...");
+        return;
+    }
+
+    function onActionChange() {
+
+        var select = document.getElementById("actionREST");
+        var action = select.options[select.selectedIndex].value
+
+        var submit = document.getElementById("submit");
+
+        var titre = document.getElementById("titre");
+        var firstName = document.getElementById("firstName");
+        var lastName = document.getElementById("lastName");
+        var birthdate = document.getElementById("birthdate");
+
+        var firstNameLabel = document.getElementById("firstName_label");
+        var lastNameLabel = document.getElementById("lastName_label");
+        var birthdateLabel = document.getElementById("birthdate_label");
+
+        if (action == "get") {
+            titre.innerHTML = "Test du find (GET)";
+            firstName.style.display = "block";
+            firstName.style.display = "block";
+            lastName.style.display = "block";
+            lastName.style.display = "block";
+            birthdate.style.display = "none";
+            birthdateLabel.style.display = "none";
+
+            submit.style.display = "block";
+        }
+        else if (action == "put") {
+            titre.innerHTML = "Test de l'update (PUT)";
+            firstName.style.display = "block";
+            lastName.style.display = "block";
+            birthdate.style.display = "block";
+
+            firstNameLabel.style.display = "block";
+            lastNameLabel.style.display = "block";
+            birthdateLabel.style.display = "block";
+
+            submit.style.display = "block";
+        }
+        else if (action == "post") {
+            titre.innerHTML = "Test du create (POST)";
+            firstName.style.display = "block";
+            lastName.style.display = "block";
+            birthdate.style.display = "block";
+
+            firstNameLabel.style.display = "block";
+            lastNameLabel.style.display = "block";
+            birthdateLabel.style.display = "block";
+
+            submit.style.display = "block";
+        }
+        else if (action == "delete") {
+            titre.innerHTML = "Test du delete (DELETE)";
+            firstName.style.display = "block";
+            lastName.style.display = "block";
+            birthdate.style.display = "none";
+
+            firstNameLabel.style.display = "block";
+            lastNameLabel.style.display = "block";
+            birthdateLabel.style.display = "none";
+
+            submit.style.display = "block";
+        }
+        else if (action == "findAll") {
+            titre.innerHTML = "Test du Find All";
+            firstName.style.display = "none";
+            lastName.style.display = "none";
+            birthdate.style.display = "none";
+
+            firstNameLabel.style.display = "none";
+            lastNameLabel.style.display = "none";
+            birthdateLabel.style.display = "none";
+
+            submit.style.display = "block";
+        }
+        else {
+            titre.innerHTML = "";
+            firstName.style.display = "none";
+            lastName.style.display = "none";
+            birthdate.style.display = "none";
+
+            firstNameLabel.style.display = "none";
+            lastNameLabel.style.display = "none";
+            birthdateLabel.style.display = "none";
+
+            submit.style.display = "none";
+        }
+    }
+
+    function onSubmit() {
+
+        var wsUrl = document.getElementById("wsUrl");
+        var url = wsUrl.value;
+
+        var result = document.getElementById("result");
+
+        var select = document.getElementById("actionREST");
+        var action = select.options[select.selectedIndex].value
+
+        var firstName = document.getElementById("firstName");
+        var lastName = document.getElementById("lastName");
+        var birthdate = document.getElementById("birthdate");
+
+        var params = {};
+
+        if (action == "get") {
+            url += firstName.value + "/" + lastName.value;
+        }
+        else if (action == "put") {
+            url += firstName.value + "/" + lastName.value;
+            params = {firstName: firstName.value, lastName:lastName.value, birthdate : new Date (birthdate.value)};
+        }
+        else if (action == "post") {
+            params = {firstName: firstName.value, lastName:lastName.value, birthdate : new Date (birthdate.value)};
+        }
+        else if (action == "delete") {
+            url += firstName.value + "/" + lastName.value;
+        }
+        else if (action == "findAll") {
+            action = "get";
+        }
+
+        params =    JSON.stringify(params);
+        xhr_object.open(action, url, true);
+
+        xhr_object.setRequestHeader('Content-Type', 'application/json');
+
+        xhr_object.onreadystatechange = function () {
+            if (xhr_object.readyState == 4) {
+                result.innerHTML = xhr_object.responseText;
+            }
+        }
+        xhr_object.send(params);
+
+    }
+
+</script>
+
+<label for="wsUrl">URL des WS :</label>
+<input type="text" id="wsUrl" size="60" name="wsUrl"
+       value="http://localhost:8080/contacts-presentation-JAXRS/rest/person/"/>
+<br/> <br/>
+
+<label for="actionREST">Action :</label>
+<select id="actionREST" name="actionREST" onchange="onActionChange();">
+    <option value=""></option>
+    <option value="get">Find (GET)</option>
+    <option value="put">Update (PUT)</option>
+    <option value="post">Create (POST)</option>
+    <option value="delete">Delete (DELETE)</option>
+    <option value="findAll">Find All</option>
+</select> <br/>
+
+<h1 id="titre"></h1>
+
+<label id="firstName_label" for="firstName" style="display:none">Prenom :</label> <input name="firstName" id="firstName"
+                                                                                         value="Sebastien"
+                                                                                         style="display:none"/> <br/>
+
+<label id="lastName_label" for="lastName" style="display:none">Nom :</label> <input name="lastName" id="lastName"
+                                                                                    value="REVEL" style="display:none"/>
+<br/>
+
+<label id="birthdate_label" for="birthdate" style="display:none">Date d'anniversaire :</label> <input name="birthdate"
+                                                                                                      id="birthdate"
+                                                                                                      value="1976/04/23"
+                                                                                                      style="display:none"/>
+<br/>
+
+
+<button id="submit" onclick="onSubmit()" style="display:none">Submit</button>
+
+<br/><br/>
+
+<div id="result">
+
+
+</div>
+
+
+</body>
+</html>
