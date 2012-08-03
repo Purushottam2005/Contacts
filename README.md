@@ -60,6 +60,13 @@ Ces web service utilisent des service Remote ([ContactServiceRemote.java](https:
 
 Les EJB utilisent les bean annotés en JPA ([Contact.java](https://github.com/sebrevel/Contacts/blob/master/Contacts-business-EJB\src\main\java\org\sebrevel\contacts\beans\Contact.java)) pour interroger la base de données mémoire Derby.
 
+
+Installation
+========
+
+Une vidéo de 8min montrant comment récupérer le code sur GitHub, créer son workspace sur IntelliJ et déployer l'application sur Glassfish est disponible [ici](http://www.youtube.com/watch?v=NJpBY6ys-mE&feature=youtu.be)
+
+
 TODO
 ========
 + Faire tourner l'application sur du JBOSS et du Tomcat EE
